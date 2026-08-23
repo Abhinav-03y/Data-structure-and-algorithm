@@ -7,19 +7,19 @@ class Solution {
         char c =s.charAt(i);
 
         int value =c;
-        for(int bit =7;bit >=0;bit--){
+        for(int bit =7;bit >=0 ;bit--){
             binary.append((value >> bit) & 1);
         }
      }
-         int left =0;
-         int right =  binary.length() -1;   
+         int L =0;
+         int R =  binary.length() -1;   
 
-         while(left<right){
-         if(binary.charAt(left) != binary.charAt(right)){
+         while(L < R){
+         if(binary.charAt(L) != binary.charAt(R)){
             return false;
          }
-         left++;
-         right--;
+         L++;
+         R--;
 
         }
         return true;
