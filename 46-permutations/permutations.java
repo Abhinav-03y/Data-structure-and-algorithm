@@ -20,17 +20,15 @@ class Solution {
     }
 
     public List<List<Integer>> permute(int[] nums) {
+    List<List<Integer>> ans = new ArrayList<>();
+    List<Integer> input = new ArrayList<>();
+    List<Integer> output = new ArrayList<>();
 
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> input = new ArrayList<>();
-        List<Integer> output = new ArrayList<>();
+    for(int num : nums){
+        input.add(num);
 
-        for (int num : nums) {
-            input.add(num);
-        }
-
-        fun(input, output, ans);
-
-        return ans;
+    }
+    fun(input,output,ans);
+    return ans;
     }
 }
