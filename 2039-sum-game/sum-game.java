@@ -1,29 +1,34 @@
 class Solution {
-    public boolean sumGame(String num) {
-      int n = num.length();
-        int mid =n/2;
+    public boolean sumGame(String s) {
 
-        int sum1 =0;
-        int sum2 =0;
-        int q1=0;
-        int q2 =0;
+        double res = 0;
+        double n = s.length();
 
-        for(int i=0;i<mid;i++){
-            if(num.charAt(i) == '?'){
-                q1++;
-            }else{
-                sum1 += num.charAt(i)-'0';
+        for (int i = 0; i < n; i++) {
+
+            double sign;
+
+            if (i < n / 2) {
+                sign = 1;
+            } else {
+                sign = -1;
             }
-        }
-        for(int i=mid ; i<n ; i++){
-            if(num.charAt(i) == '?'){
-                q2++;
-            }else{
-                sum2 += num.charAt(i)-'0';
+
+            double value;
+
+            if (s.charAt(i) == '?') {
+                value = 4.5;
+            } else {
+                value = s.charAt(i) - '0';
             }
+
+            res += sign * value;
         }
-        int diff =sum1 -sum2;
-        int qdiff =q2 -q1;
-      return 2*diff != 9*qdiff;
+
+        if (res != 0.0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
