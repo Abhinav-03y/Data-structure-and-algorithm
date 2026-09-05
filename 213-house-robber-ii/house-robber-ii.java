@@ -1,36 +1,46 @@
 class Solution {
-int dp[];
+int [][]dp;
 
-     int fun(int i ,int[] arr,int end){
-        if(i > end){
+     int fun(int i ,int[] arr,int f){
+         if (i >= arr.length) {
             return 0;
         }
-        if(dp[i] != -1){
-            return dp[i];
+     
+        if (i == arr.length - 1) {
+            if (f == 1) {
+                return 0;
+            }
+            return arr[i];
+        }
+         
+       if(dp[i][f] != -1) return dp[i][f];
+
+        int nf =f;
+
+        if(i==0){
+            nf=1;
         }
 
-            int c1= arr[i] +fun(i+2,arr,end);
-             int c2 = fun(i + 1,arr,end);
+            int rob= arr[i] +fun(i+2,arr,nf);
+             int n_rob = fun(i + 1,arr,f);
 
-              dp[i] = Math.max(c1, c2);
+              dp[i][f] = Math.max(rob,n_rob);
 
-        return dp[i];
+        return dp[i][f];
         }
      
     public int rob(int[] nums) {
-        int n = nums.length;
-           if (n == 1) {
-            return nums[0];
+     int n = nums.length;
+
+        if (n == 1) return nums[0];
+
+        dp = new int[n][2];
+
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
         }
-          dp = new int[n];
-        java.util.Arrays.fill(dp, -1);
 
-        int c1 = fun(0, nums, n-2);
-        java.util.Arrays.fill(dp, -1);
-
-        int c2 = fun(1,nums, n-1);
-
-        return Math.max(c1, c2);
+        return fun(0, nums, 0);
         
     }
 }
