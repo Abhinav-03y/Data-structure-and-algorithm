@@ -1,48 +1,39 @@
 class Solution {
+    int [][] dp = new int[1000][1000];
+    int fun(int i,int j,String s){
+        if(i>j)
+        return 0;
+        if(i ==j)
+        return 1;
 
-    int[][] dp = new int[1001][1001];
+        if(dp[i][j] != -1)
+        return dp[i][j];
 
-    int fun(int i, int j, String s, String t) {
+        int max =0;
+        if(s.charAt(i) == s.charAt(j)){
+            int a = 2+fun(i+1,j-1,s);
 
-        if(i >= s.length() || j >= t.length()) {
-            return 0;
+            max = Math.max(max,a);
+        }else{
+            int b = fun(i+1,j,s);
+            int c = fun(i,j-1,s);
+
+            max = Math.max(max,b);
+
+            max = Math.max(max,c);
         }
+return dp[i][j] = max;
+        
 
-        if(dp[i][j] != -1) {
-            return dp[i][j];
-        }
-
-        int max = 0;
-
-        if(s.charAt(i) == t.charAt(j)) {
-
-            int a = 1 + fun(i + 1, j + 1, s, t);
-            max = Math.max(max, a);
-
-        } else {
-
-            int b = fun(i + 1, j, s, t);
-            int c = fun(i, j + 1, s, t);
-
-            max = Math.max(max, b);
-            max = Math.max(max, c);
-        }
-
-        return dp[i][j] = max;
     }
-
     public int longestPalindromeSubseq(String s) {
-
-        String t = "";
-
-        for(int i = s.length() - 1; i >= 0; i--) {
-            t = t + s.charAt(i);
+        
+        for(int i=0;i<1000;i++){
+            Arrays.fill(dp[i],-1);
         }
 
-        for(int i = 0; i <= 1000; i++) {
-            Arrays.fill(dp[i], -1);
-        }
 
-        return fun(0, 0, s, t);
+        return fun(0, s.length() - 1, s);
+        
     }
 }
